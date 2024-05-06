@@ -9,25 +9,25 @@ ENV WINE_GECKO_VERSION 2.40
 
 # Install packages for building the image
 RUN apt-get update -y \
-	&& apt-get install -y --no-install-recommends \
-		curl \
-		unzip \
-		software-properties-common \
-	&& add-apt-repository ppa:ubuntu-wine/ppa
+  && apt-get install -y --no-install-recommends \
+    curl \
+    unzip \
+    software-properties-common \
+  && add-apt-repository ppa:ubuntu-wine/ppa
 
 # Install wine and related packages
 RUN dpkg --add-architecture i386 \
-	&& apt-get update -y \
-	&& apt-get install -y --no-install-recommends \
-		wine1.8 \
-		wine-gecko$WINE_GECKO_VERSION:i386 \
-		wine-gecko$WINE_GECKO_VERSION:amd64 \
-		wine-mono$WINE_MONO_VERSION \
-	&& rm -rf /var/lib/apt/lists/*
+  && apt-get update -y \
+  && apt-get install -y --no-install-recommends \
+    wine1.8 \
+    wine-gecko$WINE_GECKO_VERSION:i386 \
+    wine-gecko$WINE_GECKO_VERSION:amd64 \
+    wine-mono$WINE_MONO_VERSION \
+  && rm -rf /var/lib/apt/lists/*
 
 # Use latest version of winetricks from github
 RUN curl -SL 'https://raw.githubusercontent.com/Winetricks/winetricks/master/src/winetricks' -o /usr/local/bin/winetricks \
-	&& chmod +x /usr/local/bin/winetricks
+  && chmod +x /usr/local/bin/winetricks
 
 # Wine really doesn't like to be run as root, so let's use a non-root user
 USER xclient

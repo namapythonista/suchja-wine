@@ -1,5 +1,5 @@
 FROM suchja/x11client:latest
-MAINTAINER Jan Suchotzki <jan@suchotzki.de>
+MAINTAINER namapythonista
 
 # Inspired by monokrome/wine
 ENV WINE_MONO_VERSION 0.0.8
@@ -8,9 +8,9 @@ USER root
 # Install some tools required for creating the image
 RUN apt-get update \
   && apt-get install -y --no-install-recommends \
+    ca-certificates \
     curl \
-    unzip \
-    ca-certificates
+    unzip
 
 # Install wine and related packages
 RUN dpkg --add-architecture i386 \
@@ -38,4 +38,4 @@ ENV WINEARCH win32
 # Use xclient's home dir as working dir
 WORKDIR /home/xclient
 
-RUN echo "alias winegui='wine explorer /desktop=DockerDesktop,1024x768'" > ~/.bash_aliases 
+RUN echo "alias winegui='wine explorer /desktop=DockerDesktop,1920x1080'" > ~/.bash_aliases 
