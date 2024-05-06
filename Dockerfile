@@ -1,5 +1,5 @@
 FROM suchja/x11client:latest
-MAINTAINER namapythonista
+MAINTAINER nyanters
 
 # Inspired by monokrome/wine
 ENV WINE_MONO_VERSION 0.0.8
